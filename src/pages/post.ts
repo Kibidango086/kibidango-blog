@@ -65,5 +65,10 @@ export function postPage(post: Post) {
       <span class="material-symbols-rounded" style="font-size:16px">arrow_back</span>
       返回首页
     </a>
+  </div>
+  <div class="scroll-top-wrap" id="scroll-top-wrap" style="--progress: 0%">
+    <button class="scroll-top-btn" id="scroll-top-btn" aria-label="回到顶部">
+      <span class="material-symbols-rounded">arrow_upward</span>
+    </button>
   </div>`;
 }

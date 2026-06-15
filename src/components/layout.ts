@@ -4,7 +4,6 @@ import { EMBEDDED_CSS } from "../styles/embed";
 
 function accentCSS(): string {
   const h = site.accentHue;
-  // oklch colors matching the old blog (kibidango.top)
   return `<style id="accent-css">
 :root {
   --hue: ${h};
@@ -130,6 +129,7 @@ function initAfterSwap(){
   if(sbc){sbc.onclick=null;sbc.addEventListener('click',toggleMobileSidebar)}
   var sbe=document.getElementById('sidebar-extra'),sbtb=document.getElementById('sidebar-toggle');
   if(sbtb&&sbe){sbtb.onclick=null;sbtb.addEventListener('click',function(){sbe.classList.toggle('open')})}
+  initScrollTopBtn();
 }
 
 // -- full init on DOMContentLoaded --
@@ -196,6 +196,26 @@ document.addEventListener('DOMContentLoaded',function(){
   document.body.addEventListener('contextmenu',function(e){
     if(e.target.closest('.email-protector'))e.preventDefault();
   });
+
+  // Scroll to top button with reading progress
+  function updateScrollProgress(){
+    var wrap=document.getElementById('scroll-top-wrap');
+    if(!wrap)return;
+    var scrollTop=window.scrollY;
+    var docHeight=document.documentElement.scrollHeight-window.innerHeight;
+    var pct=docHeight>0?Math.min(scrollTop/docHeight*100,100):0;
+    wrap.style.setProperty('--progress',pct+'%');
+    wrap.classList.toggle('visible',scrollTop>300);
+  }
+  window.addEventListener('scroll',updateScrollProgress);
+  function initScrollTopBtn(){
+    var btn=document.getElementById('scroll-top-btn');
+    if(!btn)return;
+    btn.onclick=null;
+    btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+  }
+  initScrollTopBtn();
+  updateScrollProgress();
 });`;
 
 export function base(pageTitle: string, content: string, pageDesc?: string) {
