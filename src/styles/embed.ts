@@ -173,6 +173,9 @@ export const EMBEDDED_CSS = `/*! tailwindcss v4.3.0 | MIT License | https://tail
   .static {
     position: static;
   }
+  .isolate {
+    isolation: isolate;
+  }
   .col-span-full {
     grid-column: 1 / -1;
   }

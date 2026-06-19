@@ -66,11 +66,13 @@ async function navigateTo(url,push){
   if(!area)return;
   if(push===undefined)push=true;
   area.classList.add('loading');
+  var contentLoaded=false;
   try{
     var html;
     if(cache[url]){ html=cache[url]; }
     else{
       var res=await fetch(url);
+      if(!res.ok)throw new Error('Fetch failed: '+res.status);
       html=await res.text();
       cache[url]=html;
     }
@@ -80,20 +82,26 @@ async function navigateTo(url,push){
     var newTitle=doc.title;
     if(!newArea)throw new Error('No content-area in response');
     area.innerHTML=newArea.innerHTML;
+    contentLoaded=true;
     if(newTitle)document.title=newTitle;
     window.scrollTo({top:0,behavior:'smooth'});
-    // Execute any script tags from the new content (e.g. Waline lazy load)
+    // Execute scripts — isolate errors so one bad script doesn't crash SPA
     area.querySelectorAll('script').forEach(function(s){
-      var ns=document.createElement('script');
-      Array.from(s.attributes).forEach(function(a){ns.setAttribute(a.name,a.value)});
-      ns.textContent=s.textContent;
-      s.replaceWith(ns);
+      try{
+        var ns=document.createElement('script');
+        Array.from(s.attributes).forEach(function(a){ns.setAttribute(a.name,a.value)});
+        ns.textContent=s.textContent;
+        s.replaceWith(ns);
+      }catch(e2){console.warn('SPA script exec error:',e2)}
     });
-    if(push&&window.location.href!==url)history.pushState({url:url},'',url);
+    // Normalise URL: compare against origin-relative path to avoid redundant history entries
+    var norm=url.startsWith('http') ? url : window.location.origin+url;
+    if(push && window.location.href!==norm)history.pushState({url:url},'',url);
     initAfterSwap();
   }catch(e){
     console.error('SPA navigate error:',e);
-    if(push)window.location.href=url;
+    // Only full-navigate if content hasn't been loaded yet
+    if(push && !contentLoaded)window.location.href=url;
   }finally{
     area.classList.remove('loading');
   }
