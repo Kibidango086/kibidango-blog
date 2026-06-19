@@ -120,6 +120,7 @@ function initAfterSwap(){
   var toast=document.querySelector('.toast') || (function(){var t=document.createElement('div');t.className='toast';document.body.appendChild(t);return t})();
   function showToast(text){toast.innerHTML=text;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},2800);}
   document.querySelectorAll('.copy-btn').forEach(function(btn){
+    if(btn.closest('#waline'))return;
     btn.onclick=null;
     btn.addEventListener('click',function(){
       var code=btn.parentElement.querySelector('code');
@@ -163,6 +164,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var toast=document.createElement('div');toast.className='toast';document.body.appendChild(toast);
   function showToast(text){toast.innerHTML=text;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},2800);}
   document.querySelectorAll('.copy-btn').forEach(function(btn){
+    if(btn.closest('#waline'))return;
     btn.addEventListener('click',function(){
       var code=btn.parentElement.querySelector('code');
       if(!code)return;
@@ -174,8 +176,16 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   });
 
-  // General text copy listener
-  document.addEventListener('copy',function(e){showToast('已复制 <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\" target=\"_blank\">CC BY-NC-SA 4.0</a>')});
+  // General text copy listener — only prompt for blog content & social feed
+  document.addEventListener('copy',function(e){
+    var sel=document.getSelection();
+    if(sel&&sel.rangeCount>0){
+      var node=sel.getRangeAt(0).commonAncestorContainer;
+      var el=node.nodeType===3?node.parentElement:node;
+      if(!el||!el.closest('.post-content,.feed-body'))return;
+    }else{return;}
+    showToast('已复制 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>');
+  });
 
   // SPA: intercept internal link clicks
   document.body.addEventListener('click',function(e){
