@@ -1493,15 +1493,98 @@ html:not(.dark) .code-lang {
   border-top: 1px solid var(--border);
   padding: 20px 16px;
   text-align: center;
-  color: var(--muted-fg);
-  font-size: 0.74rem;
 }
-.site-footer a {
-  color: var(--primary);
+.footer-badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.footer-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 0.63rem;
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--muted-fg);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s;
+}
+a.footer-pill:hover {
+  border-color: var(--ring);
+  color: var(--fg);
   text-decoration: none;
 }
-.site-footer a:hover {
-  text-decoration: underline;
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.63rem;
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  text-decoration: none;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: filter 0.15s, box-shadow 0.15s;
+  cursor: default;
+}
+a.badge {
+  cursor: pointer;
+}
+a.badge:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  border-color: transparent;
+  text-decoration: none;
+}
+.badge-label {
+  padding: 2px 6px 2px 9px;
+  background: var(--secondary);
+  color: var(--muted-fg);
+  font-weight: 600;
+}
+.badge-value {
+  padding: 2px 9px 2px 6px;
+  color: #fff;
+  font-weight: 500;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.badge-onion {
+  background: #7D4698;
+}
+.badge-icp {
+  background: #11a5b0;
+}
+.badge-icp-full {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 12px;
+  border-radius: 6px;
+  font-size: 0.63rem;
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  text-decoration: none;
+  border: 1px solid transparent;
+  background: #FF1485;
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: filter 0.15s, box-shadow 0.15s;
+}
+.badge-icp-full:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  color: #fff;
 }
 ::selection {
   background: var(--primary);

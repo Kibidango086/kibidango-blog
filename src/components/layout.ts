@@ -337,8 +337,21 @@ function nav() {
 }
 
 export function footer() {
+  const onionDomain = "kibidg3xtw2usom6yii5lzzgh2g6c5ukwkxqdsmm6fhi7bwfdslr6uid.onion";
+  const year = new Date().getFullYear();
   return `<footer class="site-footer">
-  Powered by <a href="https://bun.sh">Bun</a> + <a href="https://elysiajs.com">ElysiaJS</a> on <a href="https://vercel.com">Vercel</a>.
-  &copy; ${new Date().getFullYear()} ${site.name}. <a href="/LICENSE">MIT</a> / <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+  <div class="footer-badges">
+    <a href="https://bun.sh" class="footer-pill" target="_blank" rel="noopener noreferrer">Bun</a>
+    <a href="https://elysiajs.com" class="footer-pill" target="_blank" rel="noopener noreferrer">ElysiaJS</a>
+    <a href="https://vercel.com" class="footer-pill" target="_blank" rel="noopener noreferrer">Vercel</a>
+    <span class="footer-pill">&copy; ${year} ${site.name}</span>
+    <a href="https://github.com/Kibidango086/kibidango-blog/blob/main/LICENSE" class="footer-pill" target="_blank" rel="noopener noreferrer" title="网站源码按 MIT 许可开源">源码 MIT</a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="footer-pill" target="_blank" rel="noopener noreferrer" title="博客内容采用 CC BY-NC-SA 4.0 许可">内容 CC BY-NC-SA 4.0</a>
+    <a href="http://${onionDomain}/" class="badge" target="_blank" rel="noopener noreferrer" title="通过 Tor 浏览器访问本站洋葱镜像">
+      <span class="badge-label">Tor Onion</span>
+      <span class="badge-value badge-onion">${onionDomain}</span>
+    </a>
+    <a href="https://icp.gov.moe/?keyword=20270721" class="badge-icp-full" target="_blank" rel="noopener noreferrer">萌ICP备20270721号</a>
+  </div>
 </footer>`;
 }
