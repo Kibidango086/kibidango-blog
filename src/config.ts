@@ -31,6 +31,7 @@ export const social = {
   twitter: "https://x.com/KibiDango086",
   bilibili: "https://space.bilibili.com/513874563",
   telegram: "https://t.me/kibidango086",
+  discord: "https://discord.com/users/1140297229551284314",
   facebook: "https://www.facebook.com/profile.php?id=61550745473623",
   email: "dango@proton.me",
 };
@@ -42,6 +43,7 @@ export const socialLinks: { key: SocialKey; label: string; url: string; encrypte
   { key: "twitter", label: "X / Twitter", url: social.twitter },
   { key: "bilibili", label: "B站", url: social.bilibili },
   { key: "telegram", label: "Telegram", url: social.telegram },
+  { key: "discord", label: "Discord", url: social.discord },
   { key: "facebook", label: "Facebook", url: social.facebook },
   { key: "email", label: "邮件", url: `mailto:${social.email}`, encrypted: encryptEmail(social.email) },
 ];
