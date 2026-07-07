@@ -9,6 +9,7 @@ import { base } from "./components/layout";
 import { homePage } from "./pages/home";
 import { archivePage } from "./pages/archive";
 import { postPage } from "./pages/post";
+import { notFoundPage } from "./pages/notfound";
 import { assetMap } from "./assets";
 
 const app = new Elysia()
@@ -48,9 +49,9 @@ const app = new Elysia()
     return base("归档", archivePage(posts));
   })
 
-  .get("/posts/:slug", async ({ params }) => {
+  .get("/posts/:slug", async ({ params, set }) => {
     const post = await getPost(params.slug);
-    if (!post) return new Response("文章未找到", { status: 404 });
+    if (!post) { set.status = 404; return base("404", notFoundPage(), "页面未找到"); }
     return base(post.meta.title, postPage(post), post.meta.description);
   })
 
@@ -108,6 +109,10 @@ ${urls}
       `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`,
       { headers: { "Content-Type": "text/plain" } }
     );
+  })
+  .get("/*", ({ set }) => {
+    set.status = 404;
+    return base("404", notFoundPage(), "页面未找到");
   });
 
 export { app };

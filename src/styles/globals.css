@@ -227,8 +227,10 @@
    Nav
    ============================================================ */
 .top-nav {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 50;
     display: flex;
     align-items: center;
@@ -239,6 +241,15 @@
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     background: var(--nav-bg);
+    transition: padding 0.25s ease;
+}
+.top-nav.nav-compact {
+    padding: 4px 16px;
+}
+.nav-spacer {
+    display: block;
+    height: 52px;
+    pointer-events: none;
 }
 .nav-brand {
     display: inline-flex;
@@ -383,6 +394,10 @@
         display: flex;
     }
 }
+
+/* ============================================================
+   Layout
+   ============================================================ */
 
 /* ============================================================
    Layout
@@ -1356,6 +1371,75 @@ html:not(.dark) .code-lang {
     margin-top: 32px;
     padding-top: 20px;
     border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   404 Page
+   ============================================================ */
+.notfound-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+}
+.notfound-orb {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--blob), transparent 70%);
+    filter: blur(60px);
+    opacity: 0.5;
+    animation: orbFloat 6s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(20px, -20px) scale(1.05); }
+    66% { transform: translate(-15px, 10px) scale(0.95); }
+}
+.notfound-content {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    position: relative;
+}
+.notfound-code {
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 800;
+    font-family: var(--font-sans);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+}
+.notfound-code-accent {
+    color: var(--primary);
+    animation: pulseAccent 2s ease-in-out infinite;
+}
+@keyframes pulseAccent {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+.notfound-sub {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 6px;
+    position: relative;
+}
+.notfound-hint {
+    font-size: 0.82rem;
+    color: var(--muted-fg);
+    margin-bottom: 28px;
+    position: relative;
+}
+.notfound-btn {
+    position: relative;
 }
 
 /* ============================================================

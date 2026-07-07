@@ -234,6 +234,24 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   initScrollTopBtn();
   updateScrollProgress();
+
+  // Header scroll effect
+  function initHeaderScroll(){
+    var n=document.getElementById('top-nav');
+    if(!n)return;
+    var busy=false;
+    function update(){
+      if(busy)return;
+      busy=true;
+      requestAnimationFrame(function(){
+        n.classList.toggle('nav-compact',window.scrollY>15);
+        busy=false;
+      });
+    }
+    window.addEventListener('scroll',update,{passive:true});
+    update();
+  }
+  initHeaderScroll();
 });`;
 
 export function base(pageTitle: string, content: string, pageDesc?: string) {
@@ -280,6 +298,7 @@ export function base(pageTitle: string, content: string, pageDesc?: string) {
 <body>
   <div class="loading-bar" id="loading-bar" aria-hidden="true"></div>
   ${nav()}
+  <div class="nav-spacer"></div>
   <div class="home-layout">
     ${sidebar()}
     <main class="home-main">
@@ -328,30 +347,30 @@ export function base(pageTitle: string, content: string, pageDesc?: string) {
 }
 
 function nav() {
-  return `<nav class="top-nav">
-  <div class="flex items-center gap-3">
-    <button id="sidebar-toggle-btn" class="sidebar-toggle-btn" aria-label="Sidebar">
-      <span class="material-symbols-rounded">menu_open</span>
-    </button>
-    <a href="/" class="nav-brand">
-      <img src="${site.avatar}" alt="" class="nav-avatar" width="30" height="30" loading="lazy">
-      <span>${site.name}</span>
-    </a>
-  </div>
-  <div id="nav-links" class="nav-links">
-    <a href="/" class="nav-link">首页</a>
-    <a href="/archive" class="nav-link">归档</a>
-  </div>
-  <div class="nav-right">
-    <button class="theme-switch" title="Toggle theme" aria-label="Toggle theme">
-      <span class="material-symbols-rounded icon-dark">dark_mode</span>
-      <span class="material-symbols-rounded icon-light">light_mode</span>
-    </button>
-    <button id="hamburger" class="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>`;
+  return `<nav class="top-nav" id="top-nav">
+    <div class="flex items-center gap-3">
+      <button id="sidebar-toggle-btn" class="sidebar-toggle-btn" aria-label="Sidebar">
+        <span class="material-symbols-rounded">menu_open</span>
+      </button>
+      <a href="/" class="nav-brand">
+        <img src="${site.avatar}" alt="" class="nav-avatar" width="30" height="30" loading="lazy">
+        <span>${site.name}</span>
+      </a>
+    </div>
+    <div id="nav-links" class="nav-links">
+      <a href="/" class="nav-link">首页</a>
+      <a href="/archive" class="nav-link">归档</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-switch" title="Toggle theme" aria-label="Toggle theme">
+        <span class="material-symbols-rounded icon-dark">dark_mode</span>
+        <span class="material-symbols-rounded icon-light">light_mode</span>
+      </button>
+      <button id="hamburger" class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>`;
 }
 
 export function footer() {
