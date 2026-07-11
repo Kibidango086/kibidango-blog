@@ -3,7 +3,7 @@ export const EMBEDDED_CSS = `/*! tailwindcss v4.3.0 | MIT License | https://tail
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
-    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Noto Sans SC", "Source Han Sans SC", system-ui, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
     --spacing: 0.25rem;
     --radius-sm: 0.25rem;
@@ -874,12 +874,12 @@ export const EMBEDDED_CSS = `/*! tailwindcss v4.3.0 | MIT License | https://tail
   font-size: 0.92rem;
   font-weight: 600;
   text-decoration: none;
-  transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: filter 0.2s, transform 0.2s;
 }
 .btn-primary:hover {
   filter: brightness(1.1);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px oklch(0.68 0.16 var(--hue) / 0.3);
+  box-shadow: none;
 }
 .btn-outline {
   display: inline-flex;
@@ -954,15 +954,6 @@ export const EMBEDDED_CSS = `/*! tailwindcss v4.3.0 | MIT License | https://tail
   height: 5px;
   border-radius: 50%;
   background: #28c840;
-  animation: pulse-dot 2s infinite;
-}
-@keyframes pulse-dot {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
 }
 .chat-body {
   padding: 14px;

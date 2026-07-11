@@ -291,7 +291,7 @@ export function base(pageTitle: string, content: string, pageDesc?: string) {
   ${accentCSS()}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400..600&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300..700&family=JetBrains+Mono:wght@400..600&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"${site.title}","url":"${site.url}","description":"${desc}","author":{"@type":"Person","name":"${site.name}"}}</script>
   <script>${themeScript}</script>
 </head>
